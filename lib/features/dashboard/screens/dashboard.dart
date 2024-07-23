@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mighty_fin/features/features.dart';
 import 'package:mighty_fin/utils/utils.dart';
 
+import '../../authentication/blocs/auth_bloc.dart';
+
 class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
   const DashboardScreen({super.key});
 
@@ -14,6 +16,7 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
     // ThemeData theme = ThemeData();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           "Dashboard",
           style: TextStyle(
@@ -33,8 +36,12 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/login");
+              context.read<AuthBloc>().add(LogoutEvent());
+              Navigator.pushReplacementNamed(context, '/login');
             },
+            // onPressed: () {
+            //   Navigator.pushNamed(context, "/login");
+            // },
             icon: const Icon(
               Icons.dashboard_outlined,
             ),

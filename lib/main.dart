@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mighty_fin/bloc/counter_bloc.dart';
 import 'package:mighty_fin/counter_observer.dart';
+import 'package:mighty_fin/features/authentication/blocs/auth_bloc.dart';
 import 'package:mighty_fin/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,13 +17,19 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? savedTheme = prefs.getString('theme');
   ThemeData initialThemeToLoad =
-  savedTheme == 'dark' ? ThemeData.dark() : ThemeData.light();
+      savedTheme == 'dark' ? ThemeData.dark() : ThemeData.light();
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-          ThemeBloc(initialThemeToLoad, prefs)
+          create: (context) => AuthBloc(
+            authRepository: AuthRepository(),
+          )..add(
+              CheckTokenEvent(),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => ThemeBloc(initialThemeToLoad, prefs)
             ..add(
               InitialThemeEvent(),
             ),
@@ -54,20 +61,42 @@ class RootApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Mighty Fin',
-          theme:theme ,
+          theme: theme,
           // theme: ThemeData(
           //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           //   useMaterial3: true,
           // ),
-          initialRoute:"/",
+          initialRoute: "/",
           routes: {
-            "/":(context)=> const NavigationScreen(),
-            "/login":(context)=> const LoginScreen(),
-            // "/tickets":(context)=> const TicketsScreen(),
+            "/": (context) => const InitialScreen(),
+            "/login": (context) => const LoginScreen(),
+            "/register": (context) => const RegisterScreen(),
+            // "/otp":(context)=> const OtpVerificationScreen(userId: null,),
             // "/more":(context)=> const MoreScreen(),
             // "/settings":(context)=> const SettingsScreen(),
           },
         );
+      },
+    );
+  }
+}
+
+class InitialScreen extends StatelessWidget {
+  const InitialScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthSuccess) {
+          return const NavigationScreen();
+        } else if (state is AuthInitial) {
+          return const LoginScreen();
+        } else {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
       },
     );
   }

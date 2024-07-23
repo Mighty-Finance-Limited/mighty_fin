@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mighty_fin/utils/constants/colors.dart';
+
+import '../../authentication/blocs/auth_bloc.dart';
 
 class BottomAppBarWalletBalanceWidget extends StatelessWidget {
   const BottomAppBarWalletBalanceWidget({
@@ -35,63 +38,75 @@ class BottomAppBarWalletBalanceWidget extends StatelessWidget {
       ),
       height: preferredSize.height,
       width: double.infinity,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text.rich(
-                TextSpan(
-                  text: "Welcome, ",
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if (state is AuthSuccess) {
+            final user = state.user;
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextSpan(
-                      text: "Musweu",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: textAmber,
+                    Text.rich(
+                      TextSpan(text: "Welcome, ", children: [
+                        TextSpan(
+                          text: user.fname ?? 'N/A',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: textAmber,
+                          ),
+                        )
+                      ]),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        color: white,
                       ),
-                    )
-                  ]
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      "Your Wallet Balance",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      "K ${user.borrowedTotal.toDouble()}",
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w300,
-                  color: white,
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "See Details",
+                    style: TextStyle(
+                      color: Colors.amber,
+                    ),
+                  ),
                 ),
+              ],
+            );
+          } else if (state is AuthFailure) {
+            return const Text("User is Not Authenicated");
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: white,
               ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Your Wallet Balance",
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                "K 52.00",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              "See Details",
-              style: TextStyle(
-                color: Colors.amber,
-              ),
-            ),
-          ),
-        ],
+            );
+          }
+        },
       ),
     );
   }

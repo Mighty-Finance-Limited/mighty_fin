@@ -11,6 +11,7 @@ const Color textWhite = Color(0xffffffff);
 const Color textBlack = Color(0xff050505);
 const Color white = Color(0xffffffff);
 const Color errorColor = Color(0xffff5757);
+const Color successColor = Color(0xff1df60d);
 
 const Color primaryAmber = Color(0xfffec00f);
 const Color secondaryAmber = Color(0xffffc00e);
