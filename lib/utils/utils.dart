@@ -5,3 +5,8 @@ export 'theme/bloc/theme_bloc.dart';
 export 'theme/bloc/theme_event.dart';
 export 'widgets/shared_widgets.dart';
 export 'widgets/custom_input_widget.dart';
+export 'widgets/custom_circle_back_btn_widget.dart';
+export 'widgets/custom_long_btn_widget.dart';
+export 'widgets/linear_gradient.dart';
+export 'widgets/custom_icon_btn.dart';
+export 'widgets/quick_actions.dart';

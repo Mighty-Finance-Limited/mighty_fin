@@ -4,7 +4,8 @@ import '../../../utils/constants/colors.dart';
 
 class CustomHeadingWidget extends StatelessWidget {
   final String text;
-  const CustomHeadingWidget({super.key, required this.text});
+  final Color? textColor;
+  const CustomHeadingWidget({super.key, required this.text, this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,9 @@ class CustomHeadingWidget extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style:  TextStyle(
           fontSize: 17,
-          color: textAmber,
+          color: textColor ?? textAmber,
           fontWeight: FontWeight.bold,
         ),
       ),

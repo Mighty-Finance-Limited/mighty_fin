@@ -46,16 +46,6 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
               Icons.dashboard_outlined,
             ),
           ),
-          BlocBuilder<ThemeBloc, ThemeData>(
-            builder: (context, state) {
-              return Switch(
-                value: state == AppTheme().getDarkTheme(),
-                onChanged: (bool val) {
-                  context.read<ThemeBloc>().add(ToggleThemeEvent());
-                },
-              );
-            },
-          ),
         ],
         // toolbarHeight: preferredSize.height,
         flexibleSpace: const LinearGradientColorHelper(),

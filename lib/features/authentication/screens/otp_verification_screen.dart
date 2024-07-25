@@ -99,7 +99,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           ),
                         ),
                       ),
-                      const AuthHeadingTextWidget(text: "OTP"),
+                      const InputHeadingTextWidget(text: "OTP"),
                       CustomInputWidget(
                         controller: _otpController,
                         hintText: "Enter OTP",

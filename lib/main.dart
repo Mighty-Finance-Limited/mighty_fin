@@ -71,8 +71,8 @@ class RootApp extends StatelessWidget {
             "/": (context) => const InitialScreen(),
             "/login": (context) => const LoginScreen(),
             "/register": (context) => const RegisterScreen(),
-            // "/otp":(context)=> const OtpVerificationScreen(userId: null,),
-            // "/more":(context)=> const MoreScreen(),
+            "/support":(context)=> const SupportScreen(),
+            "/profile":(context)=> const ProfileScreen(),
             // "/settings":(context)=> const SettingsScreen(),
           },
         );

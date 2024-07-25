@@ -124,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      const AuthHeadingTextWidget(text: "First Name"),
+                      const InputHeadingTextWidget(text: "First Name"),
                       CustomInputWidget(
                         controller: _fnameController,
                         hintText: "First Name",
@@ -138,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         obscuredText: false,
                         keyboardType: TextInputType.name,
                       ),
-                      const AuthHeadingTextWidget(text: "Last Name"),
+                      const InputHeadingTextWidget(text: "Last Name"),
                       CustomInputWidget(
                         controller: _lnameController,
                         hintText: "Last Name",
@@ -152,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         obscuredText: false,
                         keyboardType: TextInputType.name,
                       ),
-                      const AuthHeadingTextWidget(text: "Phone"),
+                      const InputHeadingTextWidget(text: "Phone"),
                       CustomInputWidget(
                         controller: _phoneController,
                         hintText: "Phone",
@@ -166,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         obscuredText: false,
                         keyboardType: TextInputType.phone,
                       ),
-                      const AuthHeadingTextWidget(text: "Email"),
+                      const InputHeadingTextWidget(text: "Email"),
                       CustomInputWidget(
                         controller: _emailController,
                         hintText: "hello@example.com",
@@ -187,7 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       const SizedBox(height: 10),
-                      const AuthHeadingTextWidget(text: "Password"),
+                      const InputHeadingTextWidget(text: "Password"),
                       CustomInputWidget(
                         keyboardType: TextInputType.text,
                         obscuredText: !_passwordVisible,

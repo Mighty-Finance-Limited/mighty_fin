@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AuthHeadingTextWidget extends StatelessWidget {
+class InputHeadingTextWidget extends StatelessWidget {
   final String text;
+  final Color? textColor;
+  final double? horizontalPadding;
 
-  const AuthHeadingTextWidget({
+  const InputHeadingTextWidget({
     super.key,
-    required this.text,
+    required this.text, this.textColor, this.horizontalPadding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal:horizontalPadding ?? 25),
       child: Text(
         text,
         style: GoogleFonts.montserrat(
           fontWeight: FontWeight.bold,
+          color: textColor,
         ),
       ),
     );

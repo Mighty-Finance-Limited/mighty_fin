@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    const AuthHeadingTextWidget(text: "Email"),
+                    const InputHeadingTextWidget(text: "Email"),
                     CustomInputWidget(
                       controller: _emailController,
                       hintText: "hello@example.com",
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     const SizedBox(height: 10),
-                    const AuthHeadingTextWidget(text: "Password"),
+                    const InputHeadingTextWidget(text: "Password"),
                     CustomInputWidget(
                       keyboardType: TextInputType.text,
                       obscuredText: !_passwordVisible,

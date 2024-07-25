@@ -4,7 +4,7 @@ class UserModel {
   final String email;
   final String? fname;
   final String? lname;
-  final String profilePhotoUrl;
+  final String? profilePhotoUrl;
   final int borrowedTotal;
 
   UserModel({

@@ -9,7 +9,9 @@ class CustomInputWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool obscuredText;
+  final bool? filledInput;
   final TextInputType keyboardType;
+  final double? horizontalPadding;
 
   const CustomInputWidget({
     super.key,
@@ -18,19 +20,28 @@ class CustomInputWidget extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     required this.obscuredText,
-    required this.keyboardType, this.hintText,
+    required this.keyboardType, this.hintText, this.horizontalPadding, this.filledInput,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: horizontalPadding ?? 25),
       child: TextFormField(
         keyboardType: keyboardType,
         obscureText: obscuredText,
         validator: validator,
         controller: controller,
         decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+            borderSide: BorderSide(
+              color: borderGrey,
+              width: 2,
+            ),
+          ),
           hintText: hintText,
           errorStyle: const TextStyle(
             color: errorColor,
@@ -46,16 +57,14 @@ class CustomInputWidget extends StatelessWidget {
             ),
             borderSide: BorderSide(
               color: primary,
-              style: BorderStyle.solid,
-              width: 3,
             ),
           ),
           prefixIcon: prefixIcon,
           // labelStyle: const TextStyle(
           //   color: textBlack,
           // ),
-          filled: false,
-          // fillColor: textWhite,
+          filled: filledInput?? false,
+          fillColor: textWhite,
           suffixIcon: suffixIcon,
         ),
       ),
