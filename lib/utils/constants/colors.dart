@@ -10,11 +10,13 @@ const Color secondaryBtnPrimary = Color(0xff653092);
 
 const Color textWhite = Color(0xffffffff);
 const Color textBlack = Color(0xff050505);
+const Color black = Color(0xff000000);
 const Color textGrey = Color(0xffa6a6a6);
 const Color borderGrey = Color(0xffd9d9d9);
 const Color white = Color(0xffffffff);
 const Color errorColor = Color(0xffff5757);
 const Color successColor = Color(0xff1df60d);
+const Color lightYellowColor = Color(0xfff7e9cc);
 
 const Color btnRed = Color(0xffff5757);
 const Color primaryAmber = Color(0xfffec00f);

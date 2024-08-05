@@ -10,3 +10,4 @@ export 'widgets/custom_long_btn_widget.dart';
 export 'widgets/linear_gradient.dart';
 export 'widgets/custom_icon_btn.dart';
 export 'widgets/quick_actions.dart';
+export 'widgets/shared_app_bar_widget.dart';

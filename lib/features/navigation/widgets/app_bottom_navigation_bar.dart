@@ -53,6 +53,11 @@ class AppBottomNavigationBar extends StatelessWidget {
                   label: 'Loans',
                 ),
                 NavigationDestination(
+                  selectedIcon: Icon(Icons.list_alt_outlined),
+                  icon: Badge(child: Icon(Icons.list_alt_outlined)),
+                  label: 'Loan History',
+                ),
+                NavigationDestination(
                   selectedIcon: Icon(Icons.settings),
                   icon: Icon(Icons.settings_outlined),
                   label: 'Settings',

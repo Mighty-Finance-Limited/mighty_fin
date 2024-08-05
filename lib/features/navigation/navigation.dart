@@ -1,4 +1,5 @@
 import 'package:mighty_fin/features/dashboard/screens/dashboard.dart';
+import 'package:mighty_fin/features/loan/screens/loan_history.dart';
 import 'package:mighty_fin/features/loan/screens/loan_screen.dart';
 import 'package:mighty_fin/features/settings/screens/settings.dart';
 
@@ -24,6 +25,7 @@ class NavigationScreen extends StatelessWidget {
             const DashboardScreen(),
             const LoanScreen(),
             // const TicketsScreen(),
+            LoanHistoryScreen(),
             const SettingsScreen()
           ][state.tabIndex],
         );

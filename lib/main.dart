@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mighty_fin/bloc/counter_bloc.dart';
 import 'package:mighty_fin/counter_observer.dart';
@@ -13,6 +14,9 @@ import 'features/features.dart';
 void main() async {
   Bloc.observer = const CounterObserver();
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   // fetch stored theme
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? savedTheme = prefs.getString('theme');
