@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mighty_fin/features/dashboard/widgets/custom_dashboard_text_icon_btn.dart';
 import 'package:mighty_fin/features/features.dart';
 import 'package:mighty_fin/utils/utils.dart';
+import 'package:mighty_fin/utils/widgets/custom_row_text_widget.dart';
 
 import '../../authentication/blocs/auth_bloc.dart';
+import '../widgets/active_loan_dashboard_widget.dart';
 
 class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
   const DashboardScreen({super.key});
@@ -29,7 +33,7 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context,"/notifications"),
             icon: const Icon(
               Icons.notifications_outlined,
             ),
@@ -60,6 +64,7 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
             height: 15,
           ),
           ApplyForLoanWidget(preferredSize: preferredSize),
+          const ActiveLoanDashboardWidget(),
           const CustomHeadingWidget(text: "Quick Actions"),
           const QuickActions(showSideMenu: false),
           ReferAFriendWidget(preferredSize: preferredSize),

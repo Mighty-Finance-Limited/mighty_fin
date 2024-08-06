@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mighty_fin/bloc/counter_bloc.dart';
 import 'package:mighty_fin/counter_observer.dart';
 import 'package:mighty_fin/features/authentication/blocs/auth_bloc.dart';
+import 'package:mighty_fin/features/notifications/screens/notifications.dart';
 import 'package:mighty_fin/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,6 +78,7 @@ class RootApp extends StatelessWidget {
             "/register": (context) => const RegisterScreen(),
             "/support":(context)=> const SupportScreen(),
             "/profile":(context)=> const ProfileScreen(),
+            "/notifications":(context)=> const NotificationsScreen(),
             // "/settings":(context)=> const SettingsScreen(),
           },
         );

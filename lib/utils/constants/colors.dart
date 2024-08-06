@@ -20,6 +20,7 @@ const Color lightYellowColor = Color(0xfff7e9cc);
 
 const Color btnRed = Color(0xffff5757);
 const Color primaryAmber = Color(0xfffec00f);
+const Color primaryBtnLightPrimary = Color(0xfff0e9ff);
 const Color secondaryAmber = Color(0xffffc00e);
 const Color secondaryBtnAmber = Color(0xffffc00e);
 const Color textAmber = Color(0xffffbf00);

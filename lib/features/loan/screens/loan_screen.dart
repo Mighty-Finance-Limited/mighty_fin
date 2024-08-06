@@ -6,7 +6,9 @@ import '../models/loan_models.dart';
 import '../repository/loan_repo.dart';
 
 class LoanScreen extends StatelessWidget {
-  const LoanScreen({super.key});
+  const LoanScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

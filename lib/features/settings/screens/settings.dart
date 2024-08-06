@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mighty_fin/features/features.dart';
 import '../../../utils/utils.dart';
-import '../../authentication/blocs/auth_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -18,7 +16,10 @@ class SettingsScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(
+              context,
+              "/notifications",
+            ),
             icon: const Icon(
               Icons.notifications_outlined,
             ),
@@ -111,5 +112,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-
-
