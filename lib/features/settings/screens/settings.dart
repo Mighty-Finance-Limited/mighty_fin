@@ -102,7 +102,7 @@ class SettingsScreen extends StatelessWidget {
           SettingsListTileWidget(
             iconData: Icons.info,
             title: "Terms & Conditions",
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context,"/termsAndConditions"),
             trailingWidget: const Icon(
               Icons.arrow_forward_ios,
             ),

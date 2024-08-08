@@ -100,6 +100,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<CheckTokenEvent>((event, emit) async {
+      emit(AuthLoading());
       final token = await authRepository.secureStorage.readToken();
       if (token != null) {
         final user = await authRepository.getUser();
@@ -112,6 +113,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthInitial());
       }
     });
+
+    // on<CheckTokenEvent>((event, emit) async {
+    //   final token = await authRepository.secureStorage.readToken();
+    //   if (token != null) {
+    //     final user = await authRepository.getUser();
+    //     if (user != null) {
+    //       emit(AuthSuccess(user: user));
+    //     } else {
+    //       emit(AuthInitial());
+    //     }
+    //   } else {
+    //     emit(AuthInitial());
+    //   }
+    // });
 
     on<LogoutEvent>((event, emit) async {
       await authRepository.logout();

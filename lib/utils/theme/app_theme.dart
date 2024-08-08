@@ -3,7 +3,6 @@ import 'package:mighty_fin/utils/constants/colors.dart';
 import '../constants/sizes.dart';
 
 class AppTheme {
-
   ThemeData getLightTheme() {
     final sizes = AppValues();
 
@@ -12,6 +11,13 @@ class AppTheme {
         primary: primary,
       ),
       navigationBarTheme: NavigationBarThemeData(
+        indicatorShape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              16,
+            ),
+          ),
+        ),
         backgroundColor: primary,
         indicatorColor: white,
         labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
@@ -27,13 +33,13 @@ class AppTheme {
                 ),
         ),
         iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
-              (Set<WidgetState> states) => states.contains(WidgetState.selected)
-        ?const IconThemeData(
-                color: Colors.deepPurple,
-              ):
-              const IconThemeData(
-                color: Colors.black,
-              ),
+          (Set<WidgetState> states) => states.contains(WidgetState.selected)
+              ? const IconThemeData(
+                  color: Colors.deepPurple,
+                )
+              : const IconThemeData(
+                  color: Colors.black,
+                ),
         ),
       ),
 
@@ -96,7 +102,7 @@ class AppTheme {
     final sizes = AppValues();
 
     return ThemeData.dark(useMaterial3: true).copyWith(
-      colorScheme:const ColorScheme.dark(
+      colorScheme: const ColorScheme.dark(
         primary: primary,
       ),
     );

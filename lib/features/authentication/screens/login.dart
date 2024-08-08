@@ -154,7 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     ),
-                    const RememberMeWidget(),
+                     RememberMeWidget(
+                      onPressed: (){},
+                    ),
                     CustomLongBtnWidget(
                       btnText: "Accept",
                       bgColor: secondaryBtnPrimary,

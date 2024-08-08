@@ -19,56 +19,70 @@ class AppBottomNavigationBar extends StatelessWidget {
       },
       builder: (context, state) {
         int currentPageIndex = state.tabIndex;
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 20,left: 10,right: 10),
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  30,
-                ),
+        return Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(
+                30,
+              ),
+              topRight: Radius.circular(
+                30,
               ),
             ),
-            child: NavigationBar(
-              elevation: 0,
-              onDestinationSelected: (int index) {
-                BlocProvider.of<NavigationBloc>(context).add(
-                  NavigationChangeEvent(
-                    tabIndex: index,
-                  ),
-                );
-              },
-              // indicatorColor: Colors.amber,
-              selectedIndex: currentPageIndex,
-              destinations: const <Widget>[
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.home),
-                  icon: Icon(Icons.home_outlined),
-                  label: 'Dashboard',
+          ),
+          child: NavigationBar(
+            elevation: 0,
+            onDestinationSelected: (int index) {
+              BlocProvider.of<NavigationBloc>(context).add(
+                NavigationChangeEvent(
+                  tabIndex: index,
                 ),
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.list_alt_outlined),
-                  icon: Badge(child: Icon(Icons.list_alt_outlined)),
-                  label: 'Loans',
+              );
+            },
+            // indicatorColor: Colors.amber,
+            selectedIndex: currentPageIndex,
+            destinations: const <Widget>[
+              NavigationDestination(
+                selectedIcon: Icon(Icons.home),
+                icon: Icon(
+                  Icons.home_outlined,
+                  color: white,
                 ),
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.list_alt_outlined),
-                  icon: Badge(child: Icon(Icons.list_alt_outlined)),
-                  label: 'Loan History',
+                label: 'Dashboard',
+              ),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.list_alt_outlined),
+                icon: Badge(
+                    child: Icon(
+                  Icons.list_alt_outlined,
+                  color: white,
+                )),
+                label: 'Loans',
+              ),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.list_alt_outlined),
+                icon: Badge(
+                    child: Icon(
+                  Icons.list_alt_outlined,
+                  color: white,
+                )),
+                label: 'Loan History',
+              ),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.settings),
+                icon: Icon(
+                  Icons.settings_outlined,
+                  color: white,
                 ),
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.settings),
-                  icon: Icon(Icons.settings_outlined),
-                  label: 'Settings',
-                ),
-                // NavigationDestination(
-                //   selectedIcon: Icon(Icons.list),
-                //   icon: Icon(Icons.list_outlined),
-                //   label: 'More',
-                // ),
-              ],
-            ),
+                label: 'Settings',
+              ),
+              // NavigationDestination(
+              //   selectedIcon: Icon(Icons.list),
+              //   icon: Icon(Icons.list_outlined),
+              //   label: 'More',
+              // ),
+            ],
           ),
         );
       },

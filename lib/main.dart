@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mighty_fin/bloc/counter_bloc.dart';
 import 'package:mighty_fin/counter_observer.dart';
 import 'package:mighty_fin/features/authentication/blocs/auth_bloc.dart';
+import 'package:mighty_fin/features/loan/loanWizard/blocs/loan_months_bloc.dart';
 import 'package:mighty_fin/features/notifications/screens/notifications.dart';
+import 'package:mighty_fin/features/settings/screens/terms_and_condtions.dart';
 import 'package:mighty_fin/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'features/loan/repository/loan_repo.dart';
 import 'features/features.dart';
@@ -15,14 +17,25 @@ import 'features/features.dart';
 void main() async {
   Bloc.observer = const CounterObserver();
   WidgetsFlutterBinding.ensureInitialized();
+
+  ///shows splash screen until auth check is complete before showing
+  FlutterNativeSplash.preserve(
+    widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
+  );
+  ///splash screen loading end
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  // fetch stored theme
+
+  /// fetch stored theme
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? savedTheme = prefs.getString('theme');
   ThemeData initialThemeToLoad =
       savedTheme == 'dark' ? ThemeData.dark() : ThemeData.light();
+  ///end
+
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -43,7 +56,7 @@ void main() async {
           create: (context) => NavigationBloc(),
         ),
         BlocProvider(
-          create: (context) => CounterBloc(),
+          create: (context) => LoanMonthsBloc(),
         ),
         ChangeNotifierProvider(
           create: (context) => LoanProvider(),
@@ -76,9 +89,10 @@ class RootApp extends StatelessWidget {
             "/": (context) => const InitialScreen(),
             "/login": (context) => const LoginScreen(),
             "/register": (context) => const RegisterScreen(),
-            "/support":(context)=> const SupportScreen(),
-            "/profile":(context)=> const ProfileScreen(),
-            "/notifications":(context)=> const NotificationsScreen(),
+            "/support": (context) => const SupportScreen(),
+            "/profile": (context) => const ProfileScreen(),
+            "/notifications": (context) => const NotificationsScreen(),
+            "/termsAndConditions": (context) => const TermsAndConditionsScreen(),
             // "/settings":(context)=> const SettingsScreen(),
           },
         );
@@ -94,14 +108,16 @@ class InitialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if (state is AuthSuccess) {
-          return const NavigationScreen();
-        } else if (state is AuthInitial) {
-          return const LoginScreen();
-        } else {
+        if (state is AuthLoading || state is AuthInitial) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
+        } else if (state is AuthSuccess) {
+          FlutterNativeSplash.remove();
+          return const NavigationScreen();
+        } else {
+          FlutterNativeSplash.remove();
+          return const LoginScreen();
         }
       },
     );

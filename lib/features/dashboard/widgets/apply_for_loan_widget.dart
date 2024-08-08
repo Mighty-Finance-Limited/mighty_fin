@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mighty_fin/features/loan/loanWizard/apply/step_one_intro.dart';
 import 'package:mighty_fin/utils/constants/colors.dart';
-
 
 class ApplyForLoanWidget extends StatelessWidget {
   final Size preferredSize;
+
   const ApplyForLoanWidget({super.key, required this.preferredSize});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
         padding: const EdgeInsets.all(
@@ -42,17 +43,13 @@ class ApplyForLoanWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text.rich(
-                  TextSpan(
-                    text: "Apply for a ",
-                    children: [
-                      TextSpan(
+                  TextSpan(text: "Apply for a ", children: [
+                    TextSpan(
                         text: "Loan",
                         style: TextStyle(
                           color: textAmber,
-                        )
-                      )
-                    ]
-                  ),
+                        ))
+                  ]),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -64,9 +61,16 @@ class ApplyForLoanWidget extends StatelessWidget {
                 ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(
-                        Colors.amber,
-                      )),
-                  onPressed: () {},
+                    Colors.amber,
+                  )),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const StepOneIntroScreen(),
+                      ),
+                    );
+                  },
                   child: const Text(
                     "Get Started",
                     style: TextStyle(
