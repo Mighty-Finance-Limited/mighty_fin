@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/loan_models.dart';
@@ -14,7 +15,7 @@ class LoanProvider with ChangeNotifier {
   LoanChildType? get selectedLoanChildType => _selectedLoanChildType;
 
   Future<void> fetchLoanTypes() async {
-    const url = 'https://admin.mightyfinance.co.zm/api/get-loan-products';
+    final url = '${dotenv.env['ENDPOINT2']}/get-loan-products';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mighty_fin/features/authentication/authentication.dart';
 import 'package:provider/provider.dart';
 

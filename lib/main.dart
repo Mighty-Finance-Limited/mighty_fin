@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mighty_fin/counter_observer.dart';
 import 'package:mighty_fin/features/authentication/blocs/auth_bloc.dart';
 import 'package:mighty_fin/features/loan/loanWizard/blocs/loan_months_bloc.dart';
@@ -15,7 +16,11 @@ import 'features/loan/repository/loan_repo.dart';
 import 'features/features.dart';
 
 void main() async {
+  ///lOAD ENVIRON VARIABLES
+  await dotenv.load(fileName: '.env');
+  /// MONITOR ALL BLOC STATES IN THE CONSOLE [DEBUGGING PURPOSES]
   Bloc.observer = const CounterObserver();
+
   WidgetsFlutterBinding.ensureInitialized();
 
   ///shows splash screen until auth check is complete before showing
