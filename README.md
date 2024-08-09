@@ -1,3 +1,8 @@
+# author:
+* - Musweu Munyima [Github Link](https://github.com/Musweu10)
+
+* version:1.0.0+1
+ 
 # mighty_fin
 
 ## Welcome to the Official Documentation for the Mighty Finance Zambia Mobile Application.
@@ -75,7 +80,7 @@ flutter pub get
 * Windows (Windows Application) Optional
 
 ### Step Five Run The App
-* There after it should launch and display as expected - Haappy Codding ;)
+* There after it should launch and display as expected - Happy Codding ;)
 
 
 # Default Flutter MD Text
