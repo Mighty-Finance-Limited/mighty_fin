@@ -40,6 +40,30 @@ class SettingsScreen extends StatelessWidget {
           const CustomHeadingWidget(
             text: 'General Settings',
           ),
+          ///This is for testing purposes and will be removed
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            child: BlocBuilder<NavigationBloc, NavigationState>(
+              builder: (context, state) {
+                return SwitchListTile(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: ThemeData.light().colorScheme.primary,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      15,
+                    ),
+                  ),
+                  title: const Text('Change NavBar(Tests)'),
+                  value: state.usePersistentNavBar,
+                  onChanged: (bool value) {
+                    context.read<NavigationBloc>().add(
+                        ToggleNavigationStyleEvent(usePersistentNavBar: value));
+                  },
+                );
+              },
+            ),
+          ),
           SettingsListTileWidget(
             iconData: Icons.brightness_6_outlined,
             title: "Mode",
@@ -102,7 +126,8 @@ class SettingsScreen extends StatelessWidget {
           SettingsListTileWidget(
             iconData: Icons.info,
             title: "Terms & Conditions",
-            onPressed: () => Navigator.pushNamed(context,"/termsAndConditions"),
+            onPressed: () =>
+                Navigator.pushNamed(context, "/termsAndConditions"),
             trailingWidget: const Icon(
               Icons.arrow_forward_ios,
             ),

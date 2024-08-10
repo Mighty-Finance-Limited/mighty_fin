@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => Navigator.pushNamed(context,"/notifications"),
+            onPressed: () => Navigator.pushNamed(context, "/notifications"),
             icon: const Icon(
               Icons.notifications_outlined,
             ),
@@ -68,9 +68,20 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
           const CustomHeadingWidget(text: "Quick Actions"),
           const QuickActions(showSideMenu: false),
           ReferAFriendWidget(preferredSize: preferredSize),
+          BlocBuilder<NavigationBloc, NavigationState>(
+            builder: (context, state) {
+              if(state.usePersistentNavBar == true){
+                return const SizedBox(
+                  height: 65,
+                );
+              }
+             else{
+               return Container();
+              }
+            },
+          ),
         ],
       ),
     );
   }
 }
-

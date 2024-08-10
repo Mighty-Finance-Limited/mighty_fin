@@ -43,7 +43,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final GlobalKey _editProfileFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _editProfileFormKey = GlobalKey<FormState>();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
@@ -272,6 +272,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               horizontalPadding: 15,
             ),
             CustomInputDropDownField<Gender>(
+              prefixIcon:  const Icon(
+                Icons.person_outline,
+                color: primary,
+              ),
               hintText: "Select your Gender",
               value: selectedGender,
               items: Gender.values,
@@ -296,6 +300,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               horizontalPadding: 15,
               hintText: "18-08-1993",
               controller: _dateOfBirthController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "This field is required";
+                }
+                return null;
+              },
               onTap: _pickDateOfBirth,
             ),
             const InputHeadingTextWidget(

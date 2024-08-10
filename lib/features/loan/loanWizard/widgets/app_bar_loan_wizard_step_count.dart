@@ -36,7 +36,7 @@ class AppBarLoanWizardStepCountWidget extends StatelessWidget {
             )
         ),
         child:  Text(
-          "Step $stepCount/4".toString(),
+          "Step $stepCount/7".toString(),
           style: const TextStyle(
             // fontSize: 20,
             fontWeight: FontWeight.bold,

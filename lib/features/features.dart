@@ -3,4 +3,5 @@ export 'dashboard/dashboard.dart';
 export 'loan/loan.dart';
 export 'settings/settings.dart';
 export 'navigation/nav_export.dart';
+export 'notifications/screens/notifications.dart';
 

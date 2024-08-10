@@ -12,6 +12,7 @@ class CustomInputWidget extends StatelessWidget {
   final bool? filledInput;
   final TextInputType keyboardType;
   final double? horizontalPadding;
+  final int?  maxLines;
 
   const CustomInputWidget({
     super.key,
@@ -20,7 +21,7 @@ class CustomInputWidget extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     required this.obscuredText,
-    required this.keyboardType, this.hintText, this.horizontalPadding, this.filledInput,
+    required this.keyboardType, this.hintText, this.horizontalPadding, this.filledInput, this.maxLines,
   });
 
   @override
@@ -28,6 +29,7 @@ class CustomInputWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: horizontalPadding ?? 25),
       child: TextFormField(
+        maxLines: maxLines,
         keyboardType: keyboardType,
         obscureText: obscuredText,
         validator: validator,
@@ -35,7 +37,7 @@ class CustomInputWidget extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(5),
+              Radius.circular(10),
             ),
             borderSide: BorderSide(
               color: borderGrey,

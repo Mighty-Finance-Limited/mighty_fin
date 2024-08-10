@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mighty_fin/features/authentication/authentication.dart';
 
-import '../../../utils/constants/colors.dart';
+import '../constants/colors.dart';
 
 class ProfileInputRowWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -37,7 +37,7 @@ class ProfileInputRowWidget extends StatelessWidget {
           textColor: textPrimary,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           child: TextFormField(
             keyboardType: keyboardType,
             // obscureText: obscuredText,
@@ -48,14 +48,14 @@ class ProfileInputRowWidget extends StatelessWidget {
               errorStyle: const TextStyle(
                 color: errorColor,
               ),
-              constraints: const BoxConstraints(
-                maxWidth: 400,
-                minWidth: 200,
-              ),
+              // constraints: const BoxConstraints(
+              //   maxWidth: 400,
+              //   minWidth: 200,
+              // ),
               focusColor: primary,
               enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(5),
+                  Radius.circular(10),
                 ),
                 borderSide: BorderSide(
                   color: borderGrey,
@@ -74,7 +74,7 @@ class ProfileInputRowWidget extends StatelessWidget {
               // labelStyle: const TextStyle(
               //   color: textBlack,
               // ),
-              filled: true,
+              filled: false,
               fillColor: textWhite,
               suffixIcon: suffixIcon,
             ),

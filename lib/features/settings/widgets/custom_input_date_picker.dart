@@ -6,6 +6,7 @@ class DateOfBirthInputPickerWidget extends StatefulWidget {
   final String hintText;
   final bool? filledInput;
   final double? horizontalPadding;
+  final String? Function(String?) validator;
   final TextEditingController controller;
   final VoidCallback onTap;
 
@@ -15,7 +16,7 @@ class DateOfBirthInputPickerWidget extends StatefulWidget {
       this.filledInput,
       this.horizontalPadding,
       required this.controller,
-      required this.onTap});
+      required this.onTap, required this.validator});
 
   @override
   State<DateOfBirthInputPickerWidget> createState() =>
@@ -29,10 +30,11 @@ class _DateOfBirthInputPickerWidgetState
     return Padding(
       padding: EdgeInsets.symmetric(
           vertical: 5, horizontal: widget.horizontalPadding ?? 25),
-      child: TextField(
+      child: TextFormField(
         controller: widget.controller,
         keyboardType: TextInputType.datetime,
         readOnly: true,
+        validator: widget.validator,
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: const TextStyle(
@@ -46,7 +48,7 @@ class _DateOfBirthInputPickerWidgetState
           ),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
-              Radius.circular(5),
+              Radius.circular(10),
             ),
             borderSide: BorderSide(
               color: borderGrey,

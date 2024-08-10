@@ -50,6 +50,7 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   flutter_native_splash: ^2.4.1
   flutter_dotenv: ^5.1.0
+  dotted_box: ^0.0.3
 
 
 

@@ -3,16 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mighty_fin/counter_observer.dart';
-import 'package:mighty_fin/features/authentication/blocs/auth_bloc.dart';
-import 'package:mighty_fin/features/loan/loanWizard/blocs/loan_months_bloc.dart';
-import 'package:mighty_fin/features/notifications/screens/notifications.dart';
-import 'package:mighty_fin/features/settings/screens/terms_and_condtions.dart';
 import 'package:mighty_fin/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'features/loan/repository/loan_repo.dart';
 import 'features/features.dart';
 
 void main() async {
@@ -76,7 +71,7 @@ void main() async {
 class RootApp extends StatelessWidget {
   const RootApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeData>(

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mighty_fin/features/authentication/authentication.dart';
+import './step_three_credentials.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/utils.dart';
 import '../../repository/loan_repo.dart';
-import '../widgets/app_bar_loan_wizard_step_count.dart';
-import '../widgets/loan_duration_counter_widget.dart';
-import '../widgets/loan_type_selection_widget.dart';
+import '../widgets/widgets_export.dart';
 
 class StepTwoGetStartedScreen extends StatefulWidget {
   const StepTwoGetStartedScreen({
@@ -43,42 +40,12 @@ class _StepTwoGetStartedScreenState extends State<StepTwoGetStartedScreen> {
       ),
       body: ListView(
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 6,
-            ),
-            child: Text.rich(
-              TextSpan(
-                text: 'Lets Get ',
-                children: [
-                  TextSpan(
-                    text: "Started! ",
-                    style: TextStyle(
-                      color: textAmber,
-                    ),
-                  )
-                ],
-              ),
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: textPrimary,
-              ),
-            ),
+          const ApplyForLoanHeadingTextWidget(
+            purpleText: 'Lets Get ',
+            amberText: "Started! ",
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
-            child: RichText(
-              text: const TextSpan(
-                text: 'Fill in the form to get instant access',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: textPrimary,
-                ),
-              ),
-            ),
+          const ApplyForLoanSubHeadingTextWidget(
+            subText: 'Fill in the form to get instant access',
           ),
 
           /// Refactored into its own class
@@ -340,7 +307,8 @@ class _StepTwoGetStartedScreenState extends State<StepTwoGetStartedScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () => Navigator.pushNamed(context,"/termsAndConditions"),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, "/termsAndConditions"),
                   child: const Text(
                     "Terms and Conditions",
                     style: TextStyle(
@@ -357,6 +325,12 @@ class _StepTwoGetStartedScreenState extends State<StepTwoGetStartedScreen> {
             btnText: "Next",
             bgColor: secondaryBtnAmber,
             onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const StepThreeCredentialsScreen(),
+                ),
+              );
               // if (loanProvider.loanTypes.isEmpty) {
               //   loanProvider.fetchLoanTypes();
               // }
