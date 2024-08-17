@@ -29,7 +29,7 @@ class CustomInputWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: horizontalPadding ?? 25),
       child: TextFormField(
-        maxLines: maxLines,
+        maxLines: maxLines?? 1,
         keyboardType: keyboardType,
         obscureText: obscuredText,
         validator: validator,

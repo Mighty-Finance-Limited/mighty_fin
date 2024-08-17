@@ -4,37 +4,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mighty_fin/counter_observer.dart';
 import 'package:mighty_fin/utils/utils.dart';
+import 'package:mighty_fin/utils/theme/repository/theme_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'features/features.dart';
+import 'features/loan/loanWizard/blocs/loan_amount_selector.dart';
+import 'features/loan/loanWizard/blocs/loan_application_cubit.dart';
+import 'features/loan/loanWizard/blocs/upload_bloc.dart';
+import 'features/loan/loanWizard/repository/upload_repo.dart';
 
 void main() async {
-  ///lOAD ENVIRON VARIABLES
+  // Loan Environment Variables
   await dotenv.load(fileName: '.env');
-  /// MONITOR ALL BLOC STATES IN THE CONSOLE [DEBUGGING PURPOSES]
   Bloc.observer = const CounterObserver();
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  ///shows splash screen until auth check is complete before showing
   FlutterNativeSplash.preserve(
-    widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
-  );
-  ///splash screen loading end
+      widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
-  /// fetch stored theme
+  // Load Theme Prefs
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? savedTheme = prefs.getString('theme');
-  ThemeData initialThemeToLoad =
-      savedTheme == 'dark' ? ThemeData.dark() : ThemeData.light();
-  ///end
-
+  ThemeRepository themeRepository = ThemeRepository(prefs);
 
   runApp(
     MultiBlocProvider(
@@ -42,25 +38,29 @@ void main() async {
         BlocProvider(
           create: (context) => AuthBloc(
             authRepository: AuthRepository(),
-          )..add(
-              CheckTokenEvent(),
-            ),
+          )..add(CheckTokenEvent()),
         ),
         BlocProvider(
-          create: (context) => ThemeBloc(initialThemeToLoad, prefs)
-            ..add(
-              InitialThemeEvent(),
-            ),
+          create: (context) =>
+              ThemeBloc(themeRepository)..add(InitialThemeEvent()),
         ),
         BlocProvider(
           create: (context) => NavigationBloc(),
         ),
         BlocProvider(
+          create: (context) => LoanApplicationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => LoanAmountCubit(),
+        ),
+        BlocProvider(
           create: (context) => LoanMonthsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => UploadBloc(UploadRepo()),
         ),
         ChangeNotifierProvider(
           create: (context) => LoanProvider(),
-          child: const RootApp(),
         ),
       ],
       child: const RootApp(),
@@ -71,7 +71,6 @@ void main() async {
 class RootApp extends StatelessWidget {
   const RootApp({super.key});
 
-  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeData>(
@@ -80,10 +79,6 @@ class RootApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Mighty Fin',
           theme: theme,
-          // theme: ThemeData(
-          //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          //   useMaterial3: true,
-          // ),
           initialRoute: "/",
           routes: {
             "/": (context) => const InitialScreen(),
@@ -92,8 +87,8 @@ class RootApp extends StatelessWidget {
             "/support": (context) => const SupportScreen(),
             "/profile": (context) => const ProfileScreen(),
             "/notifications": (context) => const NotificationsScreen(),
-            "/termsAndConditions": (context) => const TermsAndConditionsScreen(),
-            // "/settings":(context)=> const SettingsScreen(),
+            "/termsAndConditions": (context) =>
+                const TermsAndConditionsScreen(),
           },
         );
       },
@@ -108,10 +103,13 @@ class InitialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if (state is AuthLoading || state is AuthInitial) {
+        if (state is AuthLoading) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
+        } else if (state is AuthInitial) {
+          FlutterNativeSplash.remove();
+          return const LoginScreen();
         } else if (state is AuthSuccess) {
           FlutterNativeSplash.remove();
           return const NavigationScreen();
@@ -123,3 +121,19 @@ class InitialScreen extends StatelessWidget {
     );
   }
 }
+// class AuthFlow extends StatelessWidget {
+//   const AuthFlow({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<AuthBloc, AuthState>(
+//       builder: (context, state) {
+//         if (state is AuthSuccess) {
+//           return const NavigationScreen();
+//         } else {
+//           return const LoginScreen();
+//         }
+//       },
+//     );
+//   }
+// }

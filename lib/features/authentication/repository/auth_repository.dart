@@ -58,7 +58,7 @@ class AuthRepository {
         await secureStorage.writeToken(data['token']);
         await _saveUserData(data['user']);
         // Request OTP after registration
-        await requestOtp(user.id);
+        // await requestOtp(user.id);
         return user;
       } else {
         print('Register failed with status code: ${response.statusCode}');

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mighty_fin/features/loan/loanWizard/apply/step_seven_upload.dart';
 import '../model/bank_enum.dart';
 
 import '../../../../utils/utils.dart';
@@ -55,12 +56,12 @@ class _StepSixBankingDetailsScreenState
         bgColor: secondaryBtnAmber,
         onPressed: () {
           // if (_bankingDetailsFormKey.currentState!.validate()) {}
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const StepTwoGetStartedScreen(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const StepSevenUploadDocumentsScreen(),
+            ),
+          );
         },
       ),
       body: Form(

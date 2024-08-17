@@ -30,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         flexibleSpace: const FixedBgColorWithConerRadiusWidgetHelper(),
         bottom: PreferredSize(
           preferredSize:
@@ -44,9 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is AuthSuccess) {
             // Navigate to home or show a success message
-            Navigator.pushReplacementNamed(context, '/').then(
-              (value) => ScaffoldMessenger.of(context).showSnackBar(
+            Navigator.pushReplacementNamed(context, '/');
+
+            ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
+                  backgroundColor: Colors.white,
                   content: Text(
                     "Logged in Successfully",
                     style: TextStyle(
@@ -55,8 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-              ),
-            );
+              );
           } else if (state is AuthFailure) {
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(

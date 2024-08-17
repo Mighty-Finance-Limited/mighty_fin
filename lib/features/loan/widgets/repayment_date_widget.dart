@@ -7,8 +7,9 @@ import '../../../utils/constants/colors.dart';
 class RepaymentDateWIdget extends StatelessWidget {
   final double? horizontalPadding;
   final Color? color;
+  final String? text;
   const RepaymentDateWIdget({
-    super.key, this.horizontalPadding, this.color,
+    super.key, this.horizontalPadding, this.color, this.text,
   });
 
   @override
@@ -27,7 +28,7 @@ class RepaymentDateWIdget extends StatelessWidget {
             width: 5,
           ),
           Text(
-            "30 days Remaining",
+            text?? "30 days Remaining",
             style: GoogleFonts.montserrat(
               fontWeight: FontWeight.bold,
               fontSize: 11,

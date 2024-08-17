@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -148,7 +149,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   btnRed,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.read<AuthBloc>().add(LogoutEvent());
+                Navigator.pushReplacementNamed(context, '/login');
+              },
               child: Text(
                 "Logout",
                 style: GoogleFonts.montserrat(

@@ -140,11 +140,11 @@ class StepOneIntroScreen extends StatelessWidget {
                       ),
                       ListTile(
                         leading: const Icon(
-                          Icons.card_giftcard,
+                          CupertinoIcons.building_2_fill,
                           color: white,
                         ),
                         title: Text(
-                          "National ID OR Any Other Identification Card"
+                          "3 MONTHS BANK STATEMENT"
                               .toUpperCase(),
                           style: const TextStyle(
                               color: textWhite,
@@ -154,11 +154,11 @@ class StepOneIntroScreen extends StatelessWidget {
                       ),
                       ListTile(
                         leading: const Icon(
-                          Icons.card_giftcard,
+                          CupertinoIcons.doc,
                           color: white,
                         ),
                         title: Text(
-                          "National ID OR Any Other Identification Card"
+                          "LATEST UPDATED PAYSLIP"
                               .toUpperCase(),
                           style: const TextStyle(
                             color: textWhite,

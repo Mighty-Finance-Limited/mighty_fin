@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/loan_amount_selector.dart';
+import '../blocs/loan_application_cubit.dart';
 import './step_three_credentials.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +25,7 @@ class _StepTwoGetStartedScreenState extends State<StepTwoGetStartedScreen> {
   @override
   Widget build(BuildContext context) {
     final loanProvider = Provider.of<LoanProvider>(context);
+    final loanApplicationCubit = context.read<LoanApplicationCubit>();
     final ThemeData theme = ThemeData();
     return Scaffold(
       // backgroundColor: const Color(0xFF6A1B9A), // Purple background
@@ -89,27 +93,37 @@ class _StepTwoGetStartedScreenState extends State<StepTwoGetStartedScreen> {
                       color: textWhite,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Text(
-                      "K${_currentSliderValue.toStringAsFixed(2)}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
+
+                  BlocBuilder<LoanAmountCubit, int>(
+                    builder: (context, amount) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          "K${amount.toStringAsFixed(2)}",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                  Slider(
-                    activeColor: secondaryBtnAmber,
-                    // divisions: 15,
-                    value: _currentSliderValue,
-                    max: 15000,
-                    min: 500,
-                    // label: _currentSliderValue.round().toString(),
-                    onChanged: (double value) {
-                      setState(() {
-                        _currentSliderValue = value;
-                      });
+                  BlocBuilder<LoanAmountCubit, int>(
+                    builder: (context, amount) {
+                      return Slider(
+                        inactiveColor: Colors.white,
+                        activeColor: Colors.amber,
+                        // thumbColor: theme.primaryColor,
+                        value: amount.toDouble(),
+                        max: 15000,
+                        min: 500,
+                        divisions: 20000,
+                        onChanged: (double value) {
+                          print("Selected Loan Amount: $value");
+                          context.read<LoanAmountCubit>().updateAmount(
+                              value.toInt());
+                        },
+                      );
                     },
                   ),
                   const Row(

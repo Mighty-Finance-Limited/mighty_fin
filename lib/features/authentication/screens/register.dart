@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mighty_fin/features/authentication/authentication.dart';
 import '../../../utils/utils.dart';
+import '../../navigation/navigation.dart';
 import '../blocs/auth_bloc.dart';
 import '../widgets/dont_have_account_widget.dart';
 
@@ -30,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _lnameController.dispose();
     _phoneController.dispose();
   }
+
   // email: bomaho3648@vasomly.com
   // password Mathew10
 
@@ -43,6 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         flexibleSpace: const FixedBgColorWithConerRadiusWidgetHelper(),
         bottom: PreferredSize(
           preferredSize:
@@ -65,15 +68,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
               //     builder: (context) => OtpVerificationScreen(userId: state.user.id),
               //   ),
               // );
-              Navigator.pushReplacementNamed(context, '/').then(
-                    (value) => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      "Registered Successfully",
-                      style: TextStyle(
-                        color: successColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NavigationScreen(),
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.white,
+                  content: Text(
+                    "Registered Successfully",
+                    style: TextStyle(
+                      color: successColor,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -160,6 +168,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (value!.isEmpty) {
                             return "This field is required";
                           }
+                          // if (value.length < 10) {
+                          //   return "Not a valid phone number  10 characters needed";
+                          // }
                           return null;
                         },
                         prefixIcon: const Icon(Icons.phone),

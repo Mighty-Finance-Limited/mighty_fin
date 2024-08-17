@@ -40,8 +40,8 @@ class DashboardScreen extends StatelessWidget implements PreferredSizeWidget {
           ),
           IconButton(
             onPressed: () {
-              context.read<AuthBloc>().add(LogoutEvent());
-              Navigator.pushReplacementNamed(context, '/login');
+              // context.read<AuthBloc>().add(LogoutEvent());
+              // Navigator.pushReplacementNamed(context, '/login');
             },
             // onPressed: () {
             //   Navigator.pushNamed(context, "/login");
